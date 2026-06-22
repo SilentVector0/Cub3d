@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/19 14:34:08 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/19 15:19:35 by msuter           ###   ########.fr       */
+/*   Created: 2026/06/22 13:12:50 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/22 13:32:19 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,31 @@
 #include "libft/libft.h"
 #include <math.h>
 
-typedef struct s_texture
+typedef struct s_image
 {
-	void	*tex_img;
-	int		tex_bpp;
-	int		tex_
+	void	*mlx_img;
+	int		x;
+	int		y;
+}	t_image;
 
-}	t_texture;
+typedef	struct s_map
+{
+	char	**grid;
+	int		rows;
+	int		columns;
+	int		player;
+	int		exit;
+}	t_map;
 
-typedef struct s_mlx
+typedef struct s_data
 {
 	void	*mlx_ptr;
 	void	*mlx_img;
 	void	*mlx_win;
-	int		h;
-	int		l;
-
-}	t_mlx;
-
-typedef struct s_game
-{
-	
-
-}	t_game;
+	t_map	map;
+	t_image	player;
+	t_image	wall;
+	t_image	door;
+}	t_data;
 
 #endif
