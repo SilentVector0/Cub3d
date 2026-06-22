@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mathieu <mathieu@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 19:50:54 by mathieu           #+#    #+#             */
-/*   Updated: 2025/10/07 15:28:37 by mathieu          ###   ########.fr       */
+/*   Created: 2025/10/12 14:48:06 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/12 14:48:06 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 

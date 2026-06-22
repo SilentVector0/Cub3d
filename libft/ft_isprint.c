@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 13:20:03 by mathieu           #+#    #+#             */
-/*   Updated: 2025/10/08 16:10:28 by msuter           ###   ########.fr       */
+/*   Created: 2025/10/14 19:54:24 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/14 19:54:24 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 int	ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
-		return (16384);
-	else
-		return (0);
+	return (c >= 32 && c <= 126);
 }

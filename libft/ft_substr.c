@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/03 16:00:36 by mathieu           #+#    #+#             */
-/*   Updated: 2025/10/14 16:56:55 by msuter           ###   ########.fr       */
+/*   Created: 2025/10/14 19:57:05 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/14 19:57:05 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
-	char	*str;
+	char	*dest;
+	size_t	len_s;
+	size_t	final;
 
 	if (!s)
 		return (NULL);
-	i = ft_strlen(s);
-	if (start >= i || len == 0)
-	{
-		str = malloc(1);
-		if (!str)
-			return (NULL);
-		str[0] = '\0';
-		return (str);
-	}
-	if (len > i - start)
-		len = i - start;
-	str = malloc(len + 1);
-	if (!str)
+	len_s = ft_strlen(s);
+	if (start >= len_s)
+		return (ft_strdup(""));
+	final = len_s - start;
+	if (final > len)
+		final = len;
+	dest = malloc(final + 1);
+	if (!dest)
 		return (NULL);
-	ft_strlcpy(str, s + start, len + 1);
-	return (str);
+	ft_strlcpy(dest, s + start, final + 1);
+	return (dest);
 }

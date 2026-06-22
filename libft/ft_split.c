@@ -3,86 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 15:29:27 by msuter            #+#    #+#             */
-/*   Updated: 2025/10/09 15:26:02 by msuter           ###   ########.fr       */
+/*   Created: 2025/10/14 19:51:31 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/14 19:51:31 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#include "libft.h"
-
-static size_t	mot(const char *chaine, char c)
+static size_t	count_words(char const *s, char c)
 {
-	size_t	i;
-	size_t	nbmot;
+	size_t	count;
+	size_t	in;
 
-	i = 0;
-	nbmot = 0;
-	while (chaine[i])
+	count = 0;
+	in = 0;
+	while (*s)
 	{
-		while (chaine[i] == c)
-			i++;
-		if (!chaine[i])
-			break ;
-		nbmot++;
-		while (chaine[i] && chaine[i] != c)
-			i++;
+		if (*s != c && !in && ++count)
+			in = 1;
+		else if (*s == c)
+			in = 0;
+		s++;
 	}
-	return (nbmot);
+	return (count);
 }
 
-static void	*free_all(char **final, size_t j)
+static size_t	len_word(char const *s, char c)
 {
-	while (j > 0)
-		free(final[--j]);
-	free(final);
-	return (NULL);
-}
-
-static int	assign(const char *s, char **final, char c)
-{
-	size_t	i;
-	size_t	j;
-	size_t	start;
 	size_t	len;
 
-	i = 0;
-	j = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i] == '\0')
-			break ;
-		start = i;
-		while (s[i] && s[i] != c)
-			i++;
-		len = i - start;
-		final[j] = malloc(sizeof(char) * (len + 1));
-		if (!final[j])
-			return ((int)(size_t)free_all(final, j));
-		ft_strlcpy(final[j], s + start, len + 1);
-		j++;
-	}
-	final[j] = NULL;
-	return (1);
+	len = 0;
+	while (s[len] != c && s[len])
+		len++;
+	return (len);
+}
+
+static char	*word_dup(char const *s, size_t len)
+{
+	char	*word;
+
+	word = malloc(len + 1);
+	if (!word)
+		return (NULL);
+	ft_strlcpy(word, s, len + 1);
+	return (word);
+}
+
+static void	*free_split(char **dest, size_t i)
+{
+	while (i--)
+		free(dest[i]);
+	free(dest);
+	return (NULL);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**final;
-	size_t	nb_mot;
+	char	**dest;
+	size_t	i;
+	size_t	len;
+	size_t	words;
 
 	if (!s)
 		return (NULL);
-	nb_mot = mot(s, c);
-	final = malloc(sizeof(char *) * (nb_mot + 1));
-	if (!final)
+	words = count_words(s, c);
+	dest = malloc(sizeof(char *) * (words + 1));
+	if (!dest)
 		return (NULL);
-	if (!assign(s, final, c))
-		return (NULL);
-	return (final);
+	i = 0;
+	while (i < words)
+	{
+		while (*s == c)
+			s++;
+		len = len_word(s, c);
+		dest[i] = word_dup(s, len);
+		if (!dest[i])
+			return (free_split(dest, i));
+		i++;
+		s += len;
+	}
+	dest[i] = NULL;
+	return (dest);
 }

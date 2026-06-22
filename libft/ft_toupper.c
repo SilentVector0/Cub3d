@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/01 14:51:26 by msuter            #+#    #+#             */
-/*   Updated: 2025/10/01 16:42:01 by msuter           ###   ########.fr       */
+/*   Created: 2025/10/14 19:57:42 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/14 19:58:27 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	ft_toupper(int c)
 {
-	unsigned char	a;
-
-	a = (unsigned char)c;
-	if ((a - 32) >= 65 && (a - 32) <= 90)
-		return ((unsigned char)c - 32);
+	if ((unsigned char)c >= 'a' && (unsigned char)c <= 'z')
+		c -= 32;
 	return (c);
 }

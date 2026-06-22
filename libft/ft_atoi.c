@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   settings.json                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/03 01:17:15 by mathieu           #+#    #+#             */
-/*   Updated: 2025/10/13 17:14:25 by msuter           ###   ########.fr       */
+/*   Created: 2026/06/12 01:26:35 by aroduit           #+#    #+#             */
+/*   Updated: 2026/06/12 01:26:35 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *nptr)
 {
-	int	i;
+	int	res;
 	int	sign;
-	int	total;
 
-	i = 0;
+	res = 0;
 	sign = 1;
-	total = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		i++;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
+	while ((*nptr >= 9 && *nptr <= 13) || *nptr == ' ')
+		nptr++;
+	if (*nptr == '+' || *nptr == '-')
+		if (*nptr++ == '-')
 			sign = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		total = total * 10;
-		total = total + (str[i] - '0');
-		i++;
-	}
-	return (total * sign);
+	while (*nptr >= '0' && *nptr <= '9')
+		res = res * 10 + (*nptr++ - '0');
+	return (res * sign);
 }

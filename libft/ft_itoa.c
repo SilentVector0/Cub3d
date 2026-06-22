@@ -3,76 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 17:35:28 by msuter            #+#    #+#             */
-/*   Updated: 2025/10/14 16:51:32 by msuter           ###   ########.fr       */
+/*   Created: 2025/10/12 14:06:15 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/12 14:06:15 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count(int n)
+static int	count_n(long n)
 {
-	int	i;
-	int	comp;
+	int	count;
 
-	i = 0;
-	comp = n;
-	if (n < 0)
+	count = (n <= 0);
+	while (n)
 	{
-		comp = -comp;
-		i++;
+		n /= 10;
+		count++;
 	}
-	while (comp >= 10)
-	{
-		comp = comp / 10;
-		i++;
-	}
-	return (i + 1);
-}
-
-static int	reverse_sign(int n)
-{
-	if (n < 0)
-		return (-1);
-	else
-		return (1);
-}
-
-static char	*algo(int n, char *tab, int placement)
-{
-	placement = count(n);
-	if (n < 0)
-		n = -n;
-	tab[placement] = '\0';
-	placement--;
-	while (n >= 10)
-	{
-		tab[placement] = (n % 10) + '0';
-		n = n / 10;
-		placement--;
-	}
-	tab[placement] = n + '0';
-	return (tab);
+	return (count);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*number;
-	int		placement;
+	char	*dest;
+	int		count;
+	long	nmb;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	placement = 0;
-	number = malloc(sizeof(char) * (count(n) + 1));
-	if (!number)
+	nmb = n;
+	count = count_n(nmb);
+	dest = malloc(count + 1);
+	if (!dest)
 		return (NULL);
-	if (reverse_sign(n) == -1)
+	dest[count--] = '\0';
+	if (nmb == 0)
+		dest[0] = '0';
+	if (nmb < 0)
 	{
-		number[placement] = '-';
-		placement++;
+		dest[0] = '-';
+		nmb = -nmb;
 	}
-	algo(n, number, placement);
-	return (number);
+	while (nmb)
+	{
+		dest[count--] = nmb % 10 + '0';
+		nmb /= 10;
+	}
+	return (dest);
 }

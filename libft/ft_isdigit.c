@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/29 21:28:58 by mathieu           #+#    #+#             */
-/*   Updated: 2025/10/08 16:07:34 by msuter           ###   ########.fr       */
+/*   Created: 2025/10/14 19:49:59 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/14 19:50:09 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
-		return (2048);
-	else
-		return (0);
+	return (c >= '0' && c <= '9');
 }

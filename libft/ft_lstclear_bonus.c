@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/11 11:32:42 by aroduit           #+#    #+#             */
-/*   Updated: 2025/10/11 11:32:46 by aroduit          ###   ####lausanne.ch   */
+/*   Created: 2025/10/14 19:54:47 by aroduit           #+#    #+#             */
+/*   Updated: 2025/10/14 19:54:47 by aroduit          ###   ####lausanne.ch   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	size_t	start;
-	size_t	end;
+	t_list	*node;
 
-	if (!s1 || !set)
-		return (NULL);
-	start = 0;
-	end = ft_strlen(s1);
-	while (s1[start] && ft_strchr(set, s1[start]))
-		start++;
-	while (end > start && ft_strchr(set, s1[end - 1]))
-		end--;
-	return (ft_substr(s1, start, end - start));
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		node = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = node;
+	}
+	*lst = NULL;
 }
