@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 13:12:50 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/20 14:38:37 by msuter           ###   ########.fr       */
+/*   Updated: 2026/07/20 18:07:44 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@
 #include <fcntl.h>
 #include "libft/libft.h"
 #include <math.h>
+#include <minilibx-linux/mlx.h>
 
 typedef struct s_image
 {
+	char	*addr;
 	void	*mlx_img;
-	int		x;
-	int		y;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
 }	t_image;
 
 typedef	struct s_map
@@ -39,15 +43,25 @@ typedef	struct s_map
 	int		alloc;
 }	t_map;
 
+typedef enum s_orientation
+{
+	NORD,
+	SUD,
+	EST,
+	OUEST,
+} t_orient;
+
 typedef struct s_data
 {
 	void	*mlx_ptr;
-	void	*mlx_img;
 	void	*mlx_win;
 	t_map	map;
-	t_image	player;
-	t_image	wall;
+	t_image	global;
+	t_image	wall[4];
 	t_image	door;
 }	t_data;
 
 #endif
+
+int		win_creation(t_data *data);
+void	init_game(t_data *data);

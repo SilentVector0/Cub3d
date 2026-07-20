@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 13:36:41 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/20 14:39:52 by msuter           ###   ########.fr       */
+/*   Updated: 2026/07/20 17:44:28 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 void	img_init(t_image *img)
 {
 	img->mlx_img = NULL;
-	img->x = 0;
-	img->y = 0;
+	img->addr = NULL;
+	img->width = 0;
+	img->height = 0;
+	img->bpp = 0;
+	img->line_length = 0;
 }
 
 void	init_game(t_data *data)
 {
-	data->mlx_img = NULL;
 	data->mlx_ptr = NULL;
 	data->mlx_win = NULL;
 	img_init(&data->door);
-	img_init(&data->player);
-	img_init(&data->wall);
+	img_init(&data->global);
+	img_init(&data->wall[NORD]);
+	img_init(&data->wall[SUD]);
+	img_init(&data->wall[EST]);
+	img_init(&data->wall[OUEST]);
+	data->global.width = 1280;
+	data->global.height = 720;
 	data->map.columns = 0;
 	data->map.exit = 0;
 	data->map.grid = NULL;
@@ -35,7 +42,3 @@ void	init_game(t_data *data)
 	data->map.alloc = 0;
 }
 
-void	verif_para(t_data *data)
-{
-
-}
