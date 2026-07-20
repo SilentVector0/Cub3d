@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 13:12:50 by aroduit           #+#    #+#             */
-/*   Updated: 2026/06/22 13:32:19 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/07/20 14:38:37 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef	struct s_map
 	int		columns;
 	int		player;
 	int		exit;
+	int		alloc;
 }	t_map;
 
 typedef struct s_data

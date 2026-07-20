@@ -11,7 +11,7 @@ void	ft_check_parameters(int argc, char **argv, t_data *data)
 		ft_error_msg("Map file must have a .cub extension", data);
 }
 
-void	ft_init_map_rows(t_game *data, char *filename)
+void	ft_init_map_rows(t_data *data, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -19,7 +19,7 @@ void	ft_init_map_rows(t_game *data, char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_error_msg("Map couldn't be opened", data);
-	while (true)
+	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -34,7 +34,7 @@ void	ft_init_map_rows(t_game *data, char *filename)
 	close(fd);
 }
 
-void	ft_init_map(t_game *data, char *filename)
+void	ft_init_map(t_data *data, char *filename)
 {
 	int		fd;
 	int		i;
@@ -57,5 +57,5 @@ void	ft_init_map(t_game *data, char *filename)
 	}
 	data->map.grid[i] = NULL;
 	close(fd);
-	data->map_alloc = true;
+	data->map.alloc = 1;
 }

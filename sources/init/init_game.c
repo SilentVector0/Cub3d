@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 13:36:41 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/20 13:37:41 by aroduit          ###   ####lausanne.ch   */
+/*   Updated: 2026/07/20 14:39:52 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ void	init_game(t_data *data)
 	data->map.grid = NULL;
 	data->map.player = 0;
 	data->map.rows = 0;
+	data->map.alloc = 0;
 }
 
 void	verif_para(t_data *data)
 {
-	
+
 }
