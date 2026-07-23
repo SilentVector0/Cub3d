@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 13:12:50 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/20 18:07:44 by msuter           ###   ########.fr       */
+/*   Updated: 2026/07/23 14:58:42 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct s_image
 {
-	char	*addr;
+	int		*addr;
 	void	*mlx_img;
 	int		width;
 	int		height;
@@ -61,7 +61,8 @@ typedef struct s_data
 	t_image	door;
 }	t_data;
 
-#endif
-
 int		win_creation(t_data *data);
 void	init_game(t_data *data);
+void	moving_pixel(t_data *data);
+
+#endif

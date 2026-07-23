@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 14:30:49 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/20 18:15:07 by msuter           ###   ########.fr       */
+/*   Updated: 2026/07/23 15:06:07 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int	main(int argc, char **argv)
 	//mlx_hook(data->mlx_win, DestroyNotify, StructureNotifyMask,
 	// 	ft_close_game, data);
 	// mlx_hook(data->mlx_win, Expose, ExposureMask,
+	printf("test3\n");
+	moving_pixel(data);
+	printf("test4\n");
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
+	printf("test5\n");
 	// 	ft_render_map, data);
 	mlx_loop(data->mlx_ptr);
 }
