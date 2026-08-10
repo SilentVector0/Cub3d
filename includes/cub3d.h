@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/22 13:12:50 by aroduit           #+#    #+#             */
+/*   Updated: 2026/08/10 13:42:40 by msuter           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef CUB_3D_H
 #define CUB_3D_H
@@ -14,7 +25,7 @@
 
 typedef struct s_image
 {
-	char	*addr;
+	int		*addr;
 	void	*mlx_img;
 	int		width;
 	int		height;
@@ -51,7 +62,8 @@ typedef struct s_data
 	t_image	door;
 }	t_data;
 
-#endif
-
 int		win_creation(t_data *data);
 void	init_game(t_data *data);
+void	moving_pixel(t_data *data);
+
+#endif

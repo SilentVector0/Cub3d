@@ -12,7 +12,7 @@ SRCS_INIT = $(S)/init/init_game.c
 
 SRCS_CLEANUP =
 
-SRCS_RAY_CAST =
+SRCS_RAY_CAST = $(S)/render/render_player.c
 
 SRCS = $(SRCS_INIT) $(SRCS_CLEANUP) $(SRCS_RAY_CAST) $(SRCS_MAIN)
 OBJS = $(SRCS:.c=.o)
