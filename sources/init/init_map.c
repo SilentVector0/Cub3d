@@ -95,19 +95,34 @@ void	ft_verif_map(t_data *data, char	*filename)
 	}
 }
 
-void	ft_is_texture_path(t_data *data, char *line)
+void	ft_get_path(t_data *data, char *line, char *path)
 {
 	int	i;
+	int	len;
 
 	i = 0;
-	if (!ft_strncmp(line, "NO ", 3))
-	else if (!ft_strncmp(line, "SO ", 3))
-	else if (!ft_strncmp(line, "WE ", 3))
-	else if (!ft_strncmp(line, "EA ", 3))
-	else if (!ft_strncmp(line, "F ", 2))
-	else if (!ft_strncmp(line, "C ", 2))
-
+	while (path[i] == ' ')
 		i++;
+	len = ft_strlen(line) - i;
+	path = malloc(len + 1);
+	if (!path)
+		ft_error_msg("Empty map", data);
+}
+
+void	ft_is_texture_path(t_data *data, char *line)
+{
+	if (!ft_strncmp(line, "NO ", 3) && !data->wall[NO].path)
+		ft_get_path(data, line + 3, data->wall[NO].path);
+	else if (!ft_strncmp(line, "SO ", 3) && !data->wall[SO].path)
+		ft_get_path(data, line + 3, data->wall[SO].path);
+	else if (!ft_strncmp(line, "WE ", 3) && !data->wall[WE].path)
+		ft_get_path(data, line + 3, data->wall[WE].path);
+	else if (!ft_strncmp(line, "EA ", 3) && !data->wall[EA].path)
+		ft_get_path(data, line + 3, data->wall[EA].path);
+	else if (!ft_strncmp(line, "F ", 2) && !data->floor)
+		ft_get_path(data, line + 2, data->floor);
+	else if (!ft_strncmp(line, "C ", 2) && !data->celling)
+		ft_get_path(data, line + 2, data->celling);
 }
 
 void	ft_init_map(t_data *data, char *filename)

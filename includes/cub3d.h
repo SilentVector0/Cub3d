@@ -16,6 +16,7 @@
 
 typedef struct s_image
 {
+	char	*path;
 	int		*addr;
 	void	*mlx_img;
 	int		width;
@@ -37,10 +38,10 @@ typedef	struct s_map
 
 typedef enum s_orientation
 {
-	NORD,
-	SUD,
-	EST,
-	OUEST,
+	NO,
+	SO,
+	WE,
+	EA,
 } t_orient;
 
 typedef struct s_data
@@ -48,6 +49,8 @@ typedef struct s_data
 	void	*mlx_ptr;
 	void	*mlx_win;
 	t_map	map;
+	char	*celling;
+	char	*floor;
 	t_image	global;
 	t_image	wall[4];
 	t_image	door;
