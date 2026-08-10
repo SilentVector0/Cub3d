@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 13:36:41 by aroduit           #+#    #+#             */
-/*   Updated: 2026/08/10 13:15:56 by msuter           ###   ########.fr       */
+/*   Updated: 2026/08/10 14:49:36 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ void	init_game(t_data *data)
 	data->mlx_win = NULL;
 	img_init(&data->door);
 	img_init(&data->global);
-	img_init(&data->wall[NORD]);
-	img_init(&data->wall[SUD]);
-	img_init(&data->wall[EST]);
-	img_init(&data->wall[OUEST]);
+	img_init(&data->wall[NO]);
+	img_init(&data->wall[SO]);
+	img_init(&data->wall[WE]);
+	img_init(&data->wall[EA]);
 	data->global.width = 1080;
 	data->global.height = 720;
+	data->pl.pos_x = data->global.width / 2; // lignes tempo
+	data->pl.pos_y = data->global.height / 2; //lignes tempo
 	data->map.columns = 0;
 	data->map.exit = 0;
 	data->map.grid = NULL;
