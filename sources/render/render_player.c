@@ -8,14 +8,14 @@ void	moving_pixel(t_data *data)
 	int		count_x;
 	int		current_y;
 
-	size_x = data->global.height / 2;
-	size_y = data->global.width / 2;
-	current_y = size_x - 7;
-	while(current_y != size_x + 7)
+	size_x = data->global.width / 2;
+	size_y = data->global.height / 2;
+	current_y = size_y - 3;
+	while(current_y != size_y + 3)
 	{
-		offset = current_y * (data->global.line_length / 4) + size_y - 7;
+		offset = current_y * (data->global.line_length / 4) + size_x - 3;
 		count_x = 0;
-		while (count_x != 15)
+		while (count_x != 7)
 		{
 			data->global.addr[offset] = 0xFFFFFF;
 			offset++;

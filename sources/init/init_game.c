@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 13:36:41 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/20 17:44:28 by msuter           ###   ########.fr       */
+/*   Updated: 2026/08/10 13:15:56 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_game(t_data *data)
 	img_init(&data->wall[SUD]);
 	img_init(&data->wall[EST]);
 	img_init(&data->wall[OUEST]);
-	data->global.width = 1280;
+	data->global.width = 1080;
 	data->global.height = 720;
 	data->map.columns = 0;
 	data->map.exit = 0;

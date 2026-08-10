@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/22 13:12:50 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/23 14:58:42 by msuter           ###   ########.fr       */
+/*   Updated: 2026/08/10 13:38:08 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "libft/libft.h"
 #include <math.h>
 #include <minilibx-linux/mlx.h>
+#include <mlx-test>
 
 typedef struct s_image
 {
