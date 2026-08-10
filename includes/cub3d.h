@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/21 13:03:41 by aroduit           #+#    #+#             */
-/*   Updated: 2026/07/21 13:03:41 by aroduit          ###   ####lausanne.ch   */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef CUB_3D_H
 #define CUB_3D_H
@@ -40,6 +29,7 @@ typedef	struct s_map
 	int		columns;
 	int		player;
 	int		exit;
+	int		alloc;
 	int		alloc;
 }	t_map;
 
