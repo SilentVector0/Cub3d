@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 14:30:49 by aroduit           #+#    #+#             */
-/*   Updated: 2026/08/10 13:41:07 by msuter           ###   ########.fr       */
+/*   Updated: 2026/08/10 14:01:48 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	//ft_init_map(data, argv[1]);
 	if (win_creation(data) == 1)
 		return (1);
-	mlx_hook()
+	mlx_hook(data->mlx_win, KeyPress, KeyPressMask, handle_hook, data);
 	//mlx_hook(data->mlx_win, DestroyNotify, StructureNotifyMask,
 	// 	ft_close_game, data);
 	// mlx_hook(data->mlx_win, Expose, ExposureMask,

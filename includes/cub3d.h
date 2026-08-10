@@ -11,6 +11,8 @@
 #include <math.h>
 #include <minilibx-linux/mlx.h>
 #include <mlx-test>
+#include <X11/X.h>
+#include <X11/keysym.h>
 
 typedef struct s_image
 {
