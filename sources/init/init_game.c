@@ -6,7 +6,7 @@
 /*   By: msuter <msuter@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/20 13:36:41 by aroduit           #+#    #+#             */
-/*   Updated: 2026/08/10 14:49:36 by msuter           ###   ########.fr       */
+/*   Updated: 2026/08/12 13:32:39 by msuter           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,9 @@ void	init_game(t_data *data)
 	data->map.player = 0;
 	data->map.rows = 0;
 	data->map.alloc = 0;
+	data->kp.key[W] = 0;
+	data->kp.key[A] = 0;
+	data->kp.key[S] = 0;
+	data->kp.key[D] = 0;
 }
 

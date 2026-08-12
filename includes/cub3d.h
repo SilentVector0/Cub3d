@@ -13,6 +13,21 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
+# define SPEED 0.1
+
+typedef enum s_key
+{
+	W,
+	A,
+	S,
+	D,
+} t_key;
+
+typedef struct s_keypress
+{
+	int key[4];
+} t_keypress;
+
 typedef struct s_player
 {
 	double	pos_x;
@@ -60,11 +75,15 @@ typedef struct s_data
 	t_image		wall[4];
 	t_image		door;
 	t_player	pl;
+	t_keypress	kp;
+	long		time;
+	long		delta;
 }	t_data;
 
 int		win_creation(t_data *data);
 void	init_game(t_data *data);
 void	print_pixel(t_data *data, int color);
+long	my_time();
 
 //! fonction handle
 void	handle_w(t_data *data);
@@ -72,6 +91,6 @@ void	handle_a(t_data *data);
 void	handle_s(t_data *data);
 void	handle_d(t_data *data);
 //void	handle_esc(t_data *data);
-int		handle_hook(int keycode, t_data *data);
+void	detect_press(t_data *data);
 
 #endif

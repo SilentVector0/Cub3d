@@ -14,7 +14,9 @@ SRCS_CLEANUP =
 
 SRCS_RAY_CAST = $(S)/render/render_player.c $(S)/render/handle.c $(S)/render/input.c
 
-SRCS = $(SRCS_INIT) $(SRCS_CLEANUP) $(SRCS_RAY_CAST) $(SRCS_MAIN)
+SRCS_UTILS = $(S)/utils/my_time.c
+
+SRCS = $(SRCS_INIT) $(SRCS_CLEANUP) $(SRCS_RAY_CAST) $(SRCS_MAIN) $(SRCS_UTILS)
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = libft/libft.a
