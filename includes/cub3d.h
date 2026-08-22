@@ -15,6 +15,10 @@
 
 # define SPEED 0.1
 
+# define RED	"\033[31m"
+# define PURPLE	"\033[35m"
+# define RESET	"\033[0m"
+
 typedef enum s_key
 {
 	W,
@@ -78,12 +82,15 @@ typedef struct s_data
 	t_keypress	kp;
 	long		time;
 	long		delta;
+	int			current_fd;
 }	t_data;
 
+void	ft_check_parameters(int argc, char **argv, t_data *data);
 int		win_creation(t_data *data);
-void	init_game(t_data *data);
+void	ft_init_game(t_data *data);
 void	print_pixel(t_data *data, int color);
 long	my_time();
+void	ft_alloc_map(t_data *data, char *filename);
 
 //! fonction handle
 void	handle_w(t_data *data);
@@ -92,5 +99,12 @@ void	handle_s(t_data *data);
 void	handle_d(t_data *data);
 //void	handle_esc(t_data *data);
 void	detect_press(t_data *data);
+
+//exit fonction
+
+void	ft_cleanup(t_data *data);
+void	ft_error_msg(char *msg, t_data *data);
+int		ft_close_game(t_data *data);
+void	ft_victory(t_data *data);
 
 #endif

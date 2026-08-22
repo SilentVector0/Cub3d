@@ -1,0 +1,21 @@
+# MiniLibX
+minilibx-linux/
+
+# Fichiers objets et binaires
+*.o
+*.a
+cub3D
+cub3d
+
+# Libft (si compilée en tant que sous-module/dossier a part, garde le .a ignore)
+libft/*.o
+libft/*.a
+
+# Fichiers temporaires / editeurs
+*.swp
+*~
+.vscode/
+
+# Valgrind
+*.log
+vgcore.*
