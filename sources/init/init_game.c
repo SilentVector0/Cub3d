@@ -27,8 +27,6 @@ void	ft_init_images(t_data *data)
 
 void	ft_init_player(t_data *data)
 {
-	data->pl.pos_x = data->global.width / 2;
-	data->pl.pos_y = data->global.height / 2;
 	data->pl.angle = 0;
 }
 

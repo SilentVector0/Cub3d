@@ -33,19 +33,19 @@ int	main(int argc, char **argv)
 	ft_check_parameters(argc, argv, data);
 	ft_init_game(data);
 	ft_alloc_map(data, argv[1]);
-	ft_debug_print_map(data);
-	ft_cleanup(data);
-	//data->time = my_time();
-	//if (win_creation(data) == 1)
-	//	return (1);
-	//detect_press(data);
-	//mlx_hook(data->mlx_win, DestroyNotify, StructureNotifyMask,
-	// 	ft_close_game, data);
-	// mlx_hook(data->mlx_win, Expose, ExposureMask,
-	//print_pixel(data, 0xFFFFFF);
+	//ft_debug_print_map(data);
+	//ft_cleanup(data);
+	data->time = my_time();
+	if (win_creation(data) == 1)
+		return (1);
+	detect_press(data);
+	mlx_hook(data->mlx_win, DestroyNotify, StructureNotifyMask,
+		ft_close_game, data);
+	mlx_hook(data->mlx_win, Expose, ExposureMask,
+	print_map, data);
 	//mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
-	// 	ft_render_map, data);
-	//mlx_loop(data->mlx_ptr);
+		//ft_render_map, data);
+	mlx_loop(data->mlx_ptr);
 }
 
 

@@ -185,4 +185,6 @@ void	ft_alloc_map(t_data *data, char *filename)
 	ft_build_grid(data, fd, first_line);
 	close(fd);
 	data->map.alloc = 1;
+	data->map.ecart_h = data->global.height / data->map.rows;
+	data->map.ecart_w = data->global.width / data->map.columns;
 }
