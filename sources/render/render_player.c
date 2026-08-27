@@ -1,5 +1,23 @@
 #include "includes/cub3d.h"
 
+void	print_map(t_data *data)
+{
+	double	ecart_h;
+	double	ecart_w;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	ecart_h = data->global.height / data->map.rows;
+	ecart_w = data->global.width / data->map.columns;
+	while(i != data->map.rows)
+	{
+		while()
+		i++;
+	}
+}
+
 void	print_pixel(t_data *data, int color)
 {
 	size_t offset;

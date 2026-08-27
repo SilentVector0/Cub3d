@@ -47,3 +47,9 @@ int	main(int argc, char **argv)
 	// 	ft_render_map, data);
 	//mlx_loop(data->mlx_ptr);
 }
+
+
+//texture path real
+// verif map
+// conector map and render
+//raytracing
