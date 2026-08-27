@@ -12,7 +12,7 @@ SRCS_INIT = $(S)/init/init_game.c $(S)/init/init_map.c
 
 SRCS_CLEANUP = $(S)/cleanup/ft_cleanup.c $(S)/cleanup/ft_exit_game.c
 
-SRCS_RAY_CAST = $(S)/render/render_player.c $(S)/render/handle.c $(S)/render/input.c
+SRCS_RAY_CAST = $(S)/render/render_player.c $(S)/render/handle.c $(S)/render/input.c $(S)/render/render_map.c
 
 SRCS_UTILS = $(S)/utils/my_time.c
 
