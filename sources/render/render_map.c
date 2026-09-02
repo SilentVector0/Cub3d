@@ -44,12 +44,7 @@ int	print_map(t_data *data)
 				print_case(data, i, j, 0X000000);
 			else if (data->map.grid[i][j] == 'N' || data->map.grid[i][j] == 'S'
 				|| data->map.grid[i][j] == 'E' || data->map.grid[i][j] == 'W')
-				pos_player(data, i, j);
-			// else
-			// {
-			// 	printf("error on the map, wierd character\n");
-			// 	ft_cleanup(data);
-			// }
+				pos_player(data, i, j, data->map.grid[i][j]);
 			j++;
 		}
 		i++;

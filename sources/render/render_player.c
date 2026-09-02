@@ -22,8 +22,10 @@ void	print_pixel(t_data *data, int color)
 	}
 }
 
-void	pos_player(t_data *data, int i, int j)
+void	pos_player(t_data *data, int i, int j, char angle)
 {
+	if (angle == 'N')
+		data->pl.angle = (M_PI + M_PI_2) / 2;
 	data->pl.pos_x = data->map.ecart_w * j + data->map.ecart_w / 2;
 	data->pl.pos_y = data->map.ecart_h * i + data->map.ecart_h / 2;
 	print_pixel(data, 0xFF0000);

@@ -94,7 +94,7 @@ void	print_pixel(t_data *data, int color);
 long	my_time();
 void	ft_alloc_map(t_data *data, char *filename);
 int		print_map(t_data *data);
-void	pos_player(t_data *data, int i, int j);
+void	pos_player(t_data *data, int i, int j, char angle);
 
 //! fonction handle
 void	handle_w(t_data *data);
