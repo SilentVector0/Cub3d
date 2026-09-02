@@ -19,6 +19,12 @@
 # define PURPLE	"\033[35m"
 # define RESET	"\033[0m"
 
+typedef struct s_ray
+{
+	double	dx;
+	double	dy;
+}	t_ray;
+
 typedef enum s_key
 {
 	W,
