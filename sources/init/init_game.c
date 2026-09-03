@@ -27,7 +27,12 @@ void	ft_init_images(t_data *data)
 
 void	ft_init_player(t_data *data)
 {
-	data->pl.angle = 0;
+	data->pl.pos_x = 0;
+	data->pl.pos_y = 0;
+	data->pl.dir_x = 0;
+	data->pl.dir_y = 0;
+	data->pl.plane_x = 0;
+	data->pl.plane_y = 0;
 }
 
 void	ft_init_map(t_data *data)
@@ -36,7 +41,6 @@ void	ft_init_map(t_data *data)
 	data->map.rows = 0;
 	data->map.columns = 0;
 	data->map.player = 0;
-	data->map.exit = 0;
 	data->map.alloc = 0;
 }
 
@@ -46,7 +50,6 @@ void	ft_init_game(t_data *data)
 	data->mlx_win = NULL;
 	data->time = 0;
 	data->delta = 0;
-	data->current_fd = -1;
 	ft_init_images(data);
 	ft_init_player(data);
 	ft_init_map(data);

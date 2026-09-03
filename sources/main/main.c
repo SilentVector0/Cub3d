@@ -33,7 +33,8 @@ int	main(int argc, char **argv)
 	ft_check_parameters(argc, argv, data);
 	ft_init_game(data);
 	ft_alloc_map(data, argv[1]);
-	//ft_debug_print_map(data);
+	ft_check_map(data);
+	ft_debug_print_map(data);
 	//ft_cleanup(data);
 	data->time = my_time();
 	if (win_creation(data) == 1)

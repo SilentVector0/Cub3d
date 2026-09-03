@@ -10,13 +10,15 @@ SRCS_MAIN = $(S)/main/gestion_win.c $(S)/main/main.c
 
 SRCS_INIT = $(S)/init/init_game.c $(S)/init/init_map.c
 
+SRCS_CHECK = $(S)/check_map/ft_check_map.c
+
 SRCS_CLEANUP = $(S)/cleanup/ft_cleanup.c $(S)/cleanup/ft_exit_game.c
 
 SRCS_RAY_CAST = $(S)/render/render_player.c $(S)/render/handle.c $(S)/render/input.c $(S)/render/render_map.c
 
 SRCS_UTILS = $(S)/utils/my_time.c
 
-SRCS = $(SRCS_INIT) $(SRCS_CLEANUP) $(SRCS_RAY_CAST) $(SRCS_MAIN) $(SRCS_UTILS)
+SRCS = $(SRCS_INIT) $(SRCS_CHECK) $(SRCS_CLEANUP) $(SRCS_RAY_CAST) $(SRCS_MAIN) $(SRCS_UTILS)
 OBJS = $(SRCS:.c=.o)
 
 LIBFT = libft/libft.a

@@ -5,6 +5,7 @@ void	ft_check_parameters(int argc, char **argv, t_data *data)
 {
 	int	arg_len;
 
+	data->current_fd = -1;
 	if (argc != 2)
 		ft_error_msg("You must provide exactly one map file", data);
 	arg_len = ft_strlen(argv[1]);
@@ -135,9 +136,11 @@ void	ft_alloc_grid(t_data *data, int fd)
 	i = 1;
 	while (i < data->map.rows)
 	{
-		data->map.grid[i] = ft_calloc(data->map.columns + 1, sizeof(char));
+		data->map.grid[i] = malloc(data->map.columns + 1);
 		if (!data->map.grid[i])
 			ft_error_msg("Memory allocation failed for row", data);
+		ft_memset(data->map.grid[i], ' ', data->map.columns);
+		data->map.grid[i][data->map.columns] = '\0';
 		line = get_next_line(fd);
 		if (!line)
 			ft_error_msg("Map corruption", data);
@@ -155,9 +158,11 @@ void	ft_build_grid(t_data *data, int fd, char *first_line)
 	data->map.grid = malloc(sizeof(char *) * (data->map.rows + 1));
 	if (!data->map.grid)
 		ft_error_msg("Memory allocation failed for grid", data);
-	data->map.grid[0] = ft_calloc(data->map.columns + 1, sizeof(char));
+	data->map.grid[0] = malloc(data->map.columns + 1);
 	if (!data->map.grid[0])
 		ft_error_msg("Memory allocation failed for row", data);
+	ft_memset(data->map.grid[0], ' ', data->map.columns);
+	data->map.grid[0][data->map.columns] = '\0';
 	ft_memcpy(data->map.grid[0], first_line, ft_strlen(first_line));
 	free(first_line);
 	ft_alloc_grid(data, fd);

@@ -19,12 +19,6 @@
 # define PURPLE	"\033[35m"
 # define RESET	"\033[0m"
 
-typedef struct s_ray
-{
-	double	dx;
-	double	dy;
-}	t_ray;
-
 typedef enum s_key
 {
 	W,
@@ -42,7 +36,10 @@ typedef struct s_player
 {
 	double	pos_x;
 	double	pos_y;
-	double	angle;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
 
 typedef struct s_image
@@ -62,7 +59,6 @@ typedef	struct s_map
 	int		rows;
 	int		columns;
 	int		player;
-	int		exit;
 	int		alloc;
 	int		ecart_h;
 	int		ecart_w;
@@ -94,13 +90,14 @@ typedef struct s_data
 }	t_data;
 
 void	ft_check_parameters(int argc, char **argv, t_data *data);
+void	ft_check_map(t_data *data);
 int		win_creation(t_data *data);
 void	ft_init_game(t_data *data);
 void	print_pixel(t_data *data, int color);
 long	my_time();
 void	ft_alloc_map(t_data *data, char *filename);
 int		print_map(t_data *data);
-void	pos_player(t_data *data, int i, int j, char angle);
+void	pos_player(t_data *data, int i, int j);
 
 //! fonction handle
 void	handle_w(t_data *data);
