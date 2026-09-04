@@ -35,6 +35,7 @@ int	verif_state(t_data *data)
 	long	now_time;
 
 	now_time = my_time();
+	print_map(data);
 	data->delta = now_time - data->time;
 	data->time = now_time;
 	if (data->kp.key[W] == 1)
@@ -45,6 +46,7 @@ int	verif_state(t_data *data)
 		handle_s(data);
 	if (data->kp.key[D] == 1)
 		handle_d(data);
+	print_fov(data, 0x0000FF);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
 	return (0);
 }

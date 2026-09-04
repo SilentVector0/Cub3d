@@ -26,30 +26,6 @@ static void	print_case(t_data *data, int i, int j, int color)
 	}
 }
 
-void	raycast_2d(t_data *data, int color)
-{
-	size_t offset;
-	double	x;
-	double	y;
-	int	j;
-	int	i;
-
-	x = data->pl.pos_x;
-	y = data->pl.pos_y;
-	j = x / data->map.ecart_w;
-	i = y / data->map.ecart_h;
-	while ((y >= 0 && y < data->global.height) && data->map.grid[i][j] != '1')
-	{
-		offset = (int)y * (data->global.line_length/4) + (int)x;
-		printf("x: %f, offset: %zu\n", x, offset);
-		data->global.addr[offset] = color;
-		j = x / data->map.ecart_w;
-		i = y / data->map.ecart_h;
-		y--;
-	}
-	//mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
-}
-
 int	print_map(t_data *data)
 {
 	int		i;
@@ -70,6 +46,6 @@ int	print_map(t_data *data)
 		}
 		i++;
 	}
-	//raycast_2d(data, 0X0000FF);
+	print_fov(data, 0x000000);
 	return (0);
 }

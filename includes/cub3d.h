@@ -100,7 +100,8 @@ long	my_time();
 void	ft_alloc_map(t_data *data, char *filename);
 int		print_map(t_data *data);
 void	pos_player(t_data *data, int i, int j);
-void	raycast_2d(t_data *data, int color);
+void	raycast_2d(t_data *data, int color, double ray_x, double ray_y);
+void	print_fov(t_data *data, int color);
 
 //! fonction handle
 void	handle_w(t_data *data);
