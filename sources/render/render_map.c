@@ -26,23 +26,28 @@ static void	print_case(t_data *data, int i, int j, int color)
 	}
 }
 
-void	raycast_2d(t_data *data)
+void	raycast_2d(t_data *data, int color)
 {
 	size_t offset;
 	double	x;
 	double	y;
+	int	j;
+	int	i;
 
 	x = data->pl.pos_x;
 	y = data->pl.pos_y;
-	while ((int)y >= 0 && (int)y < data->map.rows
-		&& (int)x >= 0 && (int)x < data->map.columns
-		&& data->map.grid[(int)y][(int)x] != '1')
+	j = x / data->map.ecart_w;
+	i = y / data->map.ecart_h;
+	while ((y >= 0 && y < data->global.height) && data->map.grid[i][j] != '1')
 	{
-		offset = data->pl.pos_y * (data->global.line_length/4) + data->pl.pos_x;
-		data->global.addr[offset] = 0x0000FF;
+		offset = (int)y * (data->global.line_length/4) + (int)x;
+		printf("x: %f, offset: %zu\n", x, offset);
+		data->global.addr[offset] = color;
+		j = x / data->map.ecart_w;
+		i = y / data->map.ecart_h;
 		y--;
 	}
-	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
+	//mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
 }
 
 int	print_map(t_data *data)
@@ -65,6 +70,6 @@ int	print_map(t_data *data)
 		}
 		i++;
 	}
-	raycast_2d(data);
+	//raycast_2d(data, 0X0000FF);
 	return (0);
 }
