@@ -14,6 +14,7 @@
 #include <X11/keysym.h>
 
 # define SPEED 0.1
+# define FOV 66
 
 # define RED	"\033[31m"
 # define PURPLE	"\033[35m"
@@ -91,6 +92,7 @@ typedef struct s_data
 
 void	ft_check_parameters(int argc, char **argv, t_data *data);
 void	ft_check_map(t_data *data);
+void	ft_set_player(t_data *data, char c, int j, int i);
 int		win_creation(t_data *data);
 void	ft_init_game(t_data *data);
 void	print_pixel(t_data *data, int color);

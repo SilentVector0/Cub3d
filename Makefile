@@ -8,7 +8,7 @@ S = sources
 
 SRCS_MAIN = $(S)/main/gestion_win.c $(S)/main/main.c
 
-SRCS_INIT = $(S)/init/init_game.c $(S)/init/init_map.c
+SRCS_INIT = $(S)/init/init_game.c $(S)/init/init_map.c $(S)/init/setup_player.c
 
 SRCS_CHECK = $(S)/check_map/ft_check_map.c
 

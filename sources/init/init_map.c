@@ -155,9 +155,15 @@ void	ft_alloc_grid(t_data *data, int fd)
 
 void	ft_build_grid(t_data *data, int fd, char *first_line)
 {
+	int	i;
+
 	data->map.grid = malloc(sizeof(char *) * (data->map.rows + 1));
 	if (!data->map.grid)
 		ft_error_msg("Memory allocation failed for grid", data);
+	i = 0;
+	while (i <= data->map.rows)
+		data->map.grid[i++] = NULL;
+	data->map.alloc = 1;
 	data->map.grid[0] = malloc(data->map.columns + 1);
 	if (!data->map.grid[0])
 		ft_error_msg("Memory allocation failed for row", data);
@@ -184,12 +190,14 @@ void	ft_alloc_map(t_data *data, char *filename)
 	data->current_fd = -1;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		free(first_line);
 		ft_error_msg("Map couldn't be opened", data);
+	}
 	data->current_fd = fd;
 	ft_skip_config_lines(fd);
 	ft_build_grid(data, fd, first_line);
 	close(fd);
-	data->map.alloc = 1;
 	data->map.ecart_h = data->global.height / data->map.rows;
 	data->map.ecart_w = data->global.width / data->map.columns;
 }
