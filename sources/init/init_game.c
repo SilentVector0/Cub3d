@@ -57,4 +57,5 @@ void	ft_init_game(t_data *data)
 	data->kp.key[A] = 0;
 	data->kp.key[S] = 0;
 	data->kp.key[D] = 0;
+	data->current_fd = -1;
 }

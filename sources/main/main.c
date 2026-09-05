@@ -29,24 +29,17 @@ int	main(int argc, char **argv)
 
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (1);
-	ft_check_parameters(argc, argv, data);
+		ft_error_msg("Malloc data fail", NULL);
 	ft_init_game(data);
+	ft_check_parameters(argc, argv, data);
 	ft_alloc_map(data, argv[1]);
 	ft_check_map(data);
 	ft_debug_print_map(data);
-	//ft_cleanup(data);
 	data->time = my_time();
-	if (win_creation(data) == 1)
-		return (1);
-	detect_press(data);
-	mlx_hook(data->mlx_win, DestroyNotify, StructureNotifyMask,
-		ft_close_game, data);
-	mlx_hook(data->mlx_win, Expose, ExposureMask,
-	print_map, data);
-	//mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
-		//ft_render_map, data);
+	ft_win_creation(data);
+	ft_setup_hooks(data);
 	mlx_loop(data->mlx_ptr);
+	return (0);
 }
 
 

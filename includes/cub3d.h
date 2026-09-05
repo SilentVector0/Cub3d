@@ -13,8 +13,13 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 
+# define ROT_SPEED 0.003
 # define SPEED 0.1
 # define FOV 66
+
+# define COLOR_WALL	0xFFFFFF
+# define COLOR_FOV	0x0000FF
+# define COLOR_PLAYER  0xFF0000
 
 # define RED	"\033[31m"
 # define PURPLE	"\033[35m"
@@ -26,11 +31,13 @@ typedef enum s_key
 	A,
 	S,
 	D,
+	LEFT,
+	RIGHT,
 } t_key;
 
 typedef struct s_keypress
 {
-	int key[4];
+	int key[6];
 } t_keypress;
 
 typedef struct s_player
@@ -93,23 +100,25 @@ typedef struct s_data
 void	ft_check_parameters(int argc, char **argv, t_data *data);
 void	ft_check_map(t_data *data);
 void	ft_set_player(t_data *data, char c, int j, int i);
-int		win_creation(t_data *data);
+void	ft_win_creation(t_data *data);
 void	ft_init_game(t_data *data);
-void	print_pixel(t_data *data, int color);
+void	ft_print_player(t_data *data, int color);
 long	my_time();
 void	ft_alloc_map(t_data *data, char *filename);
-int		print_map(t_data *data);
-void	pos_player(t_data *data, int i, int j);
-void	raycast_2d(t_data *data, int color, double ray_x, double ray_y);
-void	print_fov(t_data *data, int color);
+
+int		ft_render_frame(t_data *data);
+void	ft_print_player(t_data *data, int color);
+void	ft_print_fov(t_data *data, int color);
+void	ft_draw_walls(t_data *data);
+void	ft_setup_hooks(t_data *data);
 
 //! fonction handle
-void	handle_w(t_data *data);
-void	handle_a(t_data *data);
-void	handle_s(t_data *data);
-void	handle_d(t_data *data);
+int		ft_verif_state(t_data *data);
+void	ft_handle_rotate(t_data *data, double angle);
+int		ft_handle_hook(int keycode, t_data *data);
+int		ft_release_hook(int keycode, t_data *data);
+void	ft_handle_move(t_data *data, double dx, double dy);
 //void	handle_esc(t_data *data);
-void	detect_press(t_data *data);
 
 //exit fonction
 

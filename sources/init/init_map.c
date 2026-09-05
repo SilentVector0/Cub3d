@@ -5,7 +5,6 @@ void	ft_check_parameters(int argc, char **argv, t_data *data)
 {
 	int	arg_len;
 
-	data->current_fd = -1;
 	if (argc != 2)
 		ft_error_msg("You must provide exactly one map file", data);
 	arg_len = ft_strlen(argv[1]);
