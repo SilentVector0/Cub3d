@@ -97,6 +97,26 @@ typedef struct s_data
 	int			current_fd;
 }	t_data;
 
+typedef	struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
+
 void	ft_check_parameters(int argc, char **argv, t_data *data);
 void	ft_check_map(t_data *data);
 void	ft_set_player(t_data *data, char c, int j, int i);

@@ -14,8 +14,8 @@ int	ft_handle_hook(int keycode, t_data *data)
 		data->kp.key[LEFT] = 1;
 	if (keycode == XK_Right)
 		data->kp.key[RIGHT] = 1;
-	// else if (keycode == XK_Escape)
-	// 	handle_esc(data);
+	if (keycode == XK_Escape)
+		ft_close_game(data);
 	return (0);
 }
 
@@ -33,8 +33,6 @@ int	ft_release_hook(int keycode, t_data *data)
 		data->kp.key[LEFT] = 0;
 	if (keycode == XK_Right)
 		data->kp.key[RIGHT] = 0;
-	// else if (keycode == XK_Escape)
-	// 	handle_esc(data);
 	return (0);
 }
 
