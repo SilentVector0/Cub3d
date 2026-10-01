@@ -17,9 +17,10 @@
 # define SPEED 0.1
 # define FOV 66
 
-# define COLOR_WALL	0xFFFFFF
-# define COLOR_FOV	0x0000FF
-# define COLOR_PLAYER  0xFF0000
+# define COLOR_WALL		0xFFFFFF
+# define COLOR_FOV		0x0000FF
+# define COLOR_PLAYER	0xFF0000
+# define TEXTURE_SIZE	64
 
 # define RED	"\033[31m"
 # define PURPLE	"\033[35m"
