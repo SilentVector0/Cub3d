@@ -1,6 +1,6 @@
 #include "includes/cub3d.h"
 
-/*void	ft_draw_ray_vector(t_data *data, t_player *pl, double dir_x, double dir_y, int color)
+/*void	ft_draw_ray_vector(t_data *data, t_player *pl, double dir_x, double dir_y)
 {
     double  norm;
     double  ux;
@@ -41,29 +41,6 @@
     }
 }*/
 
-void    ft_perform_dda(t_data *data, t_ray *ray)
-{
-    int safety;
-
-    safety = 0;
-    while (data->map.grid[ray->map_y][ray->map_x] != '1' && safety < 1000)
-    {
-        if (ray->side_dist_x < ray->side_dist_y)
-        {
-            ray->side_dist_x += ray->delta_dist_x;
-            ray->map_x += ray->step_x;
-            ray->side = 0;
-        }
-        else
-        {
-            ray->side_dist_y += ray->delta_dist_y;
-            ray->map_y += ray->step_y;
-            ray->side = 1;
-        }
-        safety++;
-    }
-}
-
 void	ft_pos_player(t_data *data, t_ray *ray)
 {
 	double	p_x;
@@ -80,6 +57,7 @@ void	ft_pos_player(t_data *data, t_ray *ray)
 	else
 		ray->side_dist_y = (p_y - ray->map_y) * ray->delta_dist_y;
 }
+
 
 void	ft_calculate_step(t_data *data, t_ray *ray)
 {
@@ -102,6 +80,44 @@ void	ft_calculate_step(t_data *data, t_ray *ray)
 	ft_pos_player(data, ray);
 }
 
+void	ft_perform_dda(t_data *data, t_ray *ray)
+{
+	int safety;
+
+	safety = 0;
+	while (data->map.grid[ray->map_y][ray->map_x] != '1' && safety < 1000)
+	{
+		if (ray->side_dist_x < ray->side_dist_y)
+		{
+			ray->side_dist_x += ray->delta_dist_x;
+			ray->map_x += ray->step_x;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->side_dist_y += ray->delta_dist_y;
+			ray->map_y += ray->step_y;
+			ray->side = 1;
+		}
+		safety++;
+	}
+}
+
+void	ft_compute_wall_dist(t_data *data, t_ray *ray)
+{
+	if (ray->side == 0)
+		ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;
+	else
+		ray->perp_wall_dist = ray->side_dist_y - ray->delta_dist_y;
+	ray->line_height = (int)(data->global.height / ray->perp_wall_dist);
+	ray->draw_start = -ray->line_height / 2 + data->global.height / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	ray->draw_end = ray->line_height / 2 + data->global.height / 2;
+	if (ray->draw_end >= data->global.height)
+		ray->draw_end = data->global.height - 1;
+}
+
 void	ft_print_fov(t_data *data)
 {
 	int		x;
@@ -117,8 +133,8 @@ void	ft_print_fov(t_data *data)
 		ray.map_y = (int)(data->pl.pos_y / data->map.ecart_h);
 		ft_calculate_step(data, &ray);
 		ft_perform_dda(data, &ray);
-		//ft_draw_ray_vector(data, &data->pl, ray.ray_dir_x, ray.ray_dir_y);
-		ft_wall_dist(&ray);
+		ft_compute_wall_dist(data, &ray);
+		ft_draw_textured_column(data, &ray, x);
 		x++;
 	}
 } 

@@ -102,13 +102,19 @@ typedef	struct s_ray
 	double	camera_x;
 	double	ray_dir_x;
 	double	ray_dir_y;
-	int		map_x;
-	int		map_y;
 	double	side_dist_x;
 	double	side_dist_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perp_wall_dist;
+	double	wall_x;
+	double	step;
+	double	pos;
+	int		tex_x;
+	int		tex_y;
+	int		dir;
+	int		map_x;
+	int		map_y;
 	int		step_x;
 	int		step_y;
 	int		side;
@@ -128,7 +134,8 @@ void	ft_alloc_map(t_data *data, char *filename);
 
 int		ft_render_frame(t_data *data);
 void	ft_print_player(t_data *data, int color);
-void	ft_print_fov(t_data *data, int color);
+void	ft_print_fov(t_data *data);
+void	ft_draw_textured_column(t_data *data, t_ray *ray, int x);
 void	ft_draw_walls(t_data *data);
 void	ft_setup_hooks(t_data *data);
 
