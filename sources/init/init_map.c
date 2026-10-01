@@ -197,6 +197,6 @@ void	ft_alloc_map(t_data *data, char *filename)
 	ft_skip_config_lines(fd);
 	ft_build_grid(data, fd, first_line);
 	close(fd);
-	data->map.ecart_h = data->global.height / data->map.rows;
-	data->map.ecart_w = data->global.width / data->map.columns;
+	data->map.ecart_h = 50 / data->map.rows;
+	data->map.ecart_w = 50 / data->map.columns;
 }
