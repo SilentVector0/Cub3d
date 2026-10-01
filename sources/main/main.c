@@ -44,9 +44,3 @@ int	main(int argc, char **argv)
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }
-
-
-//texture path real
-// verif map
-// conector map and render
-//raytracing

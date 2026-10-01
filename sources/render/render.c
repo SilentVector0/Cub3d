@@ -8,10 +8,10 @@ static	void	ft_clear_buffer(t_data *data)
 int	ft_render_frame(t_data *data)
 {
 	ft_clear_buffer(data);
-	//ft_draw_walls(data);
 	ft_print_fov(data);
-	//ft_print_player(data, COLOR_PLAYER);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win, data->global.mlx_img, 0, 0);
+	ft_draw_walls(data);
+	ft_print_player(data, COLOR_PLAYER);
 	return (0);
 }
 

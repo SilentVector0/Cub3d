@@ -44,13 +44,13 @@ int	ft_verif_state(t_data *data)
 	data->delta = now_time - data->time;
 	data->time = now_time;
 	if (data->kp.key[W] == 1)
-		ft_handle_move(data, SPEED * data->delta, 0);
+		ft_handle_move(data, (SPEED * data->delta) * 0.18, 0);
 	if (data->kp.key[A] == 1)
-		ft_handle_move(data, 0, -SPEED * data->delta);
+		ft_handle_move(data, 0, (-SPEED * data->delta) * 0.1);
 	if (data->kp.key[S] == 1)
-		ft_handle_move(data, -SPEED * data->delta, 0);
+		ft_handle_move(data, (-SPEED * data->delta) * 0.18, 0);
 	if (data->kp.key[D] == 1)
-		ft_handle_move(data, 0, SPEED * data->delta);
+		ft_handle_move(data, 0, (SPEED * data->delta) * 0.1);
 	if (data->kp.key[LEFT] == 1)
 		ft_handle_rotate(data, -ROT_SPEED * data->delta);
 	if (data->kp.key[RIGHT] == 1)

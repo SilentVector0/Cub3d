@@ -1,6 +1,6 @@
 #include "includes/cub3d.h"
 
-/*void	ft_load_wall_textures(t_data *data)
+void	ft_load_wall_textures(t_data *data)
 {
 	int endian;
 	int i;
@@ -16,7 +16,7 @@
 			&data->wall[i].bpp, &data->wall[i].line_length, &endian);
 		i++;
 	}
-}*/
+}
 
 void	ft_win_creation(t_data *data)
 {
@@ -34,6 +34,6 @@ void	ft_win_creation(t_data *data)
 	data->global.addr = (int *)mlx_get_data_addr(data->global.mlx_img, &data->global.bpp, &data->global.line_length, &endian);
 	if (!data->global.addr)
 		ft_error_msg("Take addr fail", data);
-	//ft_load_wall_textures(data);
+	ft_load_wall_textures(data);
 }
 
