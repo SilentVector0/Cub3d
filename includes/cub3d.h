@@ -14,7 +14,7 @@
 #include <X11/keysym.h>
 
 # define ROT_SPEED 0.003
-# define SPEED 0.1
+# define SPEED 1
 # define FOV 66
 
 # define COLOR_WALL		0xFFFFFF
@@ -85,9 +85,8 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*mlx_win;
+	char		*first_line;
 	t_map		map;
-	char		*celling;
-	char		*floor;
 	t_image		global;
 	t_image		wall[4];
 	t_image		door;
@@ -96,6 +95,8 @@ typedef struct s_data
 	long		time;
 	long		delta;
 	int			current_fd;
+	int			floor;
+	int			ceiling;
 }	t_data;
 
 typedef	struct s_ray
@@ -153,6 +154,5 @@ void	ft_handle_move(t_data *data, double dx, double dy);
 void	ft_cleanup(t_data *data);
 void	ft_error_msg(char *msg, t_data *data);
 int		ft_close_game(t_data *data);
-void	ft_victory(t_data *data);
 
 #endif

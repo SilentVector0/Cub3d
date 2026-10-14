@@ -38,7 +38,3 @@ void	ft_handle_rotate(t_data *data, double angle)
 	data->pl.plane_y = old_plane_x * sin(angle) + data->pl.plane_y * cos(angle);
 }
 
-// void	handle_esc(t_data *data)
-// {
-
-// }

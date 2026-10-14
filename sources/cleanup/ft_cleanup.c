@@ -34,24 +34,20 @@ void	ft_drain_fd(int fd)
 	close(fd);
 }
 
-void	ft_cleanup(t_data *data)
+static void	ft_free_map(t_data *data)
 {
 	int	i;
 
-	if (!data)
+	if (!data->map.alloc)
 		return ;
 	i = 0;
-	if (data->map.alloc)
-	{
-		while (i < data->map.rows)
-			free(data->map.grid[i++]);
-		free(data->map.grid);
-	}
-	i = 0;
-	while (i < 4)
-		free(data->wall[i++].path);
-	free(data->floor);
-	free(data->celling);
+	while (i < data->map.rows)
+		free(data->map.grid[i++]);
+	free(data->map.grid);
+}
+
+static void	ft_free_mlx(t_data *data)
+{
 	ft_destroy_images(data);
 	if (data->mlx_ptr && data->mlx_win)
 		mlx_destroy_window(data->mlx_ptr, data->mlx_win);
@@ -60,6 +56,21 @@ void	ft_cleanup(t_data *data)
 		mlx_destroy_display(data->mlx_ptr);
 		free(data->mlx_ptr);
 	}
+}
+
+void	ft_cleanup(t_data *data)
+{
+	int	i;
+
+	if (!data)
+		return ;
+	if (data->first_line)
+		free(data->first_line);
+	ft_free_map(data);
+	i = 0;
+	while (i < 4)
+		free(data->wall[i++].path);
+	ft_free_mlx(data);
 	if (data->current_fd >= 0)
 		ft_drain_fd(data->current_fd);
 	free(data);

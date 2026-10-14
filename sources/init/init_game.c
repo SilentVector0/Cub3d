@@ -21,8 +21,8 @@ void	ft_init_images(t_data *data)
 	ft_img_init(&data->wall[EA]);
 	data->global.width = 1080;
 	data->global.height = 720;
-	data->celling = NULL;
-	data->floor = NULL;
+	data->floor = -1;
+	data->ceiling = -1;
 }
 
 void	ft_init_player(t_data *data)
@@ -46,6 +46,7 @@ void	ft_init_map(t_data *data)
 
 void	ft_init_game(t_data *data)
 {
+	data->first_line = NULL;
 	data->mlx_ptr = NULL;
 	data->mlx_win = NULL;
 	data->time = 0;

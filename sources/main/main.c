@@ -11,8 +11,8 @@ void	ft_debug_print_map(t_data *data)
 	printf("SO: %s\n", data->wall[SO].path ? data->wall[SO].path : "(null)");
 	printf("WE: %s\n", data->wall[WE].path ? data->wall[WE].path : "(null)");
 	printf("EA: %s\n", data->wall[EA].path ? data->wall[EA].path : "(null)");
-	printf("floor: %s\n", data->floor ? data->floor : "(null)");
-	printf("celling: %s\n", data->celling ? data->celling : "(null)");
+	printf("floor: %d\n", data->floor);
+	printf("celling: %d\n", data->ceiling);
 	printf("--- grid ---\n");
 	i = 0;
 	while (i < data->map.rows)

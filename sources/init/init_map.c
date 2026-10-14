@@ -27,21 +27,56 @@ void	ft_get_path(t_data *data, char *line, char **path)
 {
 	int		i;
 	int		len;
-	char	*result;
 
 	i = 0;
 	while (line[i] == ' ')
 		i++;
 	len = ft_strlen(line) - i;
-	if (ft_strlen(line) > 0  && line[len + i - 1] == '\n')
+	while (len > 0 && line[len + i - 1] == ' ')
 		len--;
+	if (len == 0)
+		ft_error_msg("Missing texture path", data);
 	*path = malloc(len + 1);
 	if (!*path)
 		ft_error_msg("alloc path fail", data);
-	result = *path;
-	while (line[i] && line[i] != '\n')
-		*result++ = line[i++];
-	*result = '\0';
+	ft_memcpy(*path, line + i, len);
+	(*path)[len] = '\0';
+}
+
+int	ft_get_nb(t_data *data, char **s, char sep)
+{
+	int	nb;
+	int digits;
+
+	while (**s == ' ')
+		(*s)++;
+	nb = 0;
+	digits = 0;
+	while (**s >= '0' && **s <= '9')
+	{
+		nb = nb * 10 + (**s - '0');
+		if (nb > 255)
+			ft_error_msg("Invalide color (exepted R,G,B in [0, 255])", data);
+		(*s)++;
+		digits++;
+	}
+	while (**s == ' ')
+		(*s)++;
+	if (digits == 0 || **s != sep)
+		ft_error_msg("Invalide color (exepted R,G,B in [0, 255])", data);
+	if (sep)
+		(*s)++;
+	return (nb);
+}
+
+void	ft_get_color(t_data *data, char *line, int *color)
+{
+	char	*s;
+
+	s = line;
+	*color = ft_get_nb(data, &s, ',') << 16;
+	*color |= ft_get_nb(data, &s, ',') << 8;
+	*color |= ft_get_nb(data, &s, '\0');
 }
 
 void	ft_is_texture_path(t_data *data, char *line)
@@ -54,44 +89,38 @@ void	ft_is_texture_path(t_data *data, char *line)
 		ft_get_path(data, line + 3, &data->wall[WE].path);
 	else if (!ft_strncmp(line, "EA ", 3) && !data->wall[EA].path)
 		ft_get_path(data, line + 3, &data->wall[EA].path);
-	else if (!ft_strncmp(line, "F ", 2) && !data->floor)
-		ft_get_path(data, line + 2, &data->floor);
-	else if (!ft_strncmp(line, "C ", 2) && !data->celling)
-		ft_get_path(data, line + 2, &data->celling);
+	else if (!ft_strncmp(line, "F ", 2) && data->floor == -1)
+		ft_get_color(data, line + 2, &data->floor);
+	else if (!ft_strncmp(line, "C ", 2) && data->ceiling == -1)
+		ft_get_color(data, line + 2, &data->ceiling);
 	else
-	{
-		free(line);
-		ft_error_msg("Duplicate texture", data);
-	}
+		ft_error_msg("Duplicate texture or color", data);
 }
 
-char	*ft_config_and_search_map(t_data *data, int fd)
+void	ft_config_and_search_map(t_data *data, int fd)
 {
-	char	*line;
-
 	while (1)
 	{
-		line = get_next_line(fd);
-		if (!line)
+		data->first_line = get_next_line(fd);
+		if (!data->first_line)
 			break ;
-		if (ft_strlen(line) > 0 && line[ft_strlen(line) - 1] == '\n')
-			line[ft_strlen(line) - 1] = '\0';
-		if (!ft_is_config_line(line))
-			return (line);
-		if (ft_strlen(line) > 0)
-			ft_is_texture_path(data, line);
-		free(line);
+		if (ft_strlen(data->first_line) > 0 && data->first_line[ft_strlen(data->first_line) - 1] == '\n')
+			data->first_line[ft_strlen(data->first_line) - 1] = '\0';
+		if (!ft_is_config_line(data->first_line))
+			return ;
+		if (ft_strlen(data->first_line) > 0)
+			ft_is_texture_path(data, data->first_line);
+		free(data->first_line);
 	}
 	ft_error_msg("No map found in file", data);
-	return (NULL);
 }
 
 
-void	ft_grid_size(t_data *data, int fd, char *first_line)
+void	ft_grid_size(t_data *data, int fd)
 {
 	char	*line;
 
-	data->map.columns = ft_strlen(first_line);
+	data->map.columns = ft_strlen(data->first_line);
 	data->map.rows = 1;
 	while (1)
 	{
@@ -152,7 +181,7 @@ void	ft_alloc_grid(t_data *data, int fd)
 	data->map.grid[i] = NULL;
 }
 
-void	ft_build_grid(t_data *data, int fd, char *first_line)
+void	ft_build_grid(t_data *data, int fd)
 {
 	int	i;
 
@@ -168,8 +197,7 @@ void	ft_build_grid(t_data *data, int fd, char *first_line)
 		ft_error_msg("Memory allocation failed for row", data);
 	ft_memset(data->map.grid[0], ' ', data->map.columns);
 	data->map.grid[0][data->map.columns] = '\0';
-	ft_memcpy(data->map.grid[0], first_line, ft_strlen(first_line));
-	free(first_line);
+	ft_memcpy(data->map.grid[0], data->first_line, ft_strlen(data->first_line));
 	ft_alloc_grid(data, fd);
 }
 
@@ -177,26 +205,23 @@ void	ft_build_grid(t_data *data, int fd, char *first_line)
 void	ft_alloc_map(t_data *data, char *filename)
 {
 	int		fd;
-	char	*first_line;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		ft_error_msg("Map couldn't be opened", data);
 	data->current_fd = fd;
-	first_line = ft_config_and_search_map(data, fd);
-	ft_grid_size(data, fd, first_line);
+	ft_config_and_search_map(data, fd);
+	ft_grid_size(data, fd);
 	close(fd);
 	data->current_fd = -1;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		free(first_line);
 		ft_error_msg("Map couldn't be opened", data);
-	}
 	data->current_fd = fd;
 	ft_skip_config_lines(fd);
-	ft_build_grid(data, fd, first_line);
+	ft_build_grid(data, fd);
 	close(fd);
+	data->current_fd = -1;
 	data->map.ecart_h = 200 / data->map.rows;
 	data->map.ecart_w = 200 / data->map.columns;
 }
