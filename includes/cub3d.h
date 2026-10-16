@@ -14,7 +14,7 @@
 #include <X11/keysym.h>
 
 # define ROT_SPEED 0.003
-# define SPEED 1
+# define SPEED 0.2
 # define FOV 66
 
 # define COLOR_WALL		0xFFFFFF
