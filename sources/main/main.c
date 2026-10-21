@@ -34,13 +34,10 @@ int	main(int argc, char **argv)
 	ft_check_parameters(argc, argv, data);
 	ft_alloc_map(data, argv[1]);
 	ft_check_map(data);
-	ft_debug_print_map(data);
+	//ft_debug_print_map(data);
 	data->time = my_time();
-	printf("1\n");
 	ft_win_creation(data);
-	printf("2\n");
 	ft_setup_hooks(data);
-	printf("3\n");
 	mlx_loop(data->mlx_ptr);
 	return (0);
 }

@@ -40,6 +40,9 @@ $(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+val: $(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=all --track-origins=yes ./cub3D map/bad/forbidden.cub
+
 clean:
 	rm -f $(OBJS)
 	$(MAKE) -C libft clean
