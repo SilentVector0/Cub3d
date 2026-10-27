@@ -1,27 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/27 02:55:09 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 02:55:09 by aroduit          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "includes/cub3d.h"
-
-void	ft_debug_print_map(t_data *data)
-{
-	int	i;
-
-	printf("--- MAP DEBUG ---\n");
-	printf("rows: %d | columns: %d\n", data->map.rows, data->map.columns);
-	printf("NO: %s\n", data->wall[NO].path ? data->wall[NO].path : "(null)");
-	printf("SO: %s\n", data->wall[SO].path ? data->wall[SO].path : "(null)");
-	printf("WE: %s\n", data->wall[WE].path ? data->wall[WE].path : "(null)");
-	printf("EA: %s\n", data->wall[EA].path ? data->wall[EA].path : "(null)");
-	printf("floor: %d\n", data->floor);
-	printf("celling: %d\n", data->ceiling);
-	printf("--- grid ---\n");
-	i = 0;
-	while (i < data->map.rows)
-	{
-		printf("[%2d] \"%s\"\n", i, data->map.grid[i]);
-		i++;
-	}
-	printf("-----------------\n");
-}
 
 int	main(int argc, char **argv)
 {
@@ -34,7 +23,6 @@ int	main(int argc, char **argv)
 	ft_check_parameters(argc, argv, data);
 	ft_alloc_map(data, argv[1]);
 	ft_check_map(data);
-	//ft_debug_print_map(data);
 	data->time = my_time();
 	ft_win_creation(data);
 	ft_setup_hooks(data);

@@ -1,17 +1,29 @@
-#ifndef CUB_3D_H
-#define CUB_3D_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 26/10/2026 14:15:47 by aroduit           #+#    #+#             */
+/*   Updated: 27/10/2026 03:21:52 by aroduit          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/time.h>
-#include <fcntl.h>
-#include "libft/libft.h"
-#include <math.h>
-#include <minilibx-linux/mlx.h>
-#include <X11/X.h>
-#include <X11/keysym.h>
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <fcntl.h>
+# include "libft/libft.h"
+# include <math.h>
+# include <minilibx-linux/mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # define ROT_SPEED 0.003
 # define SPEED 0.2
@@ -34,12 +46,12 @@ typedef enum s_key
 	D,
 	LEFT,
 	RIGHT,
-} t_key;
+}	t_key;
 
 typedef struct s_keypress
 {
-	int key[6];
-} t_keypress;
+	int	key[6];
+}	t_keypress;
 
 typedef struct s_player
 {
@@ -62,7 +74,7 @@ typedef struct s_image
 	int		line_length;
 }	t_image;
 
-typedef	struct s_map
+typedef struct s_map
 {
 	char	**grid;
 	int		rows;
@@ -79,7 +91,7 @@ typedef enum s_orientation
 	SO,
 	WE,
 	EA,
-} t_orient;
+}	t_orient;
 
 typedef struct s_data
 {
@@ -99,7 +111,7 @@ typedef struct s_data
 	int			ceiling;
 }	t_data;
 
-typedef	struct s_ray
+typedef struct s_ray
 {
 	double	camera_x;
 	double	ray_dir_x;
@@ -125,32 +137,27 @@ typedef	struct s_ray
 	int		draw_end;
 }	t_ray;
 
+//init and check fonctions
+void	ft_init_game(t_data *data);
+void	ft_alloc_map(t_data *data, char *filename);
+void	ft_config_and_search_map(t_data *data, int fd);
 void	ft_check_parameters(int argc, char **argv, t_data *data);
 void	ft_check_map(t_data *data);
-void	ft_set_player(t_data *data, char c, int j, int i);
+int		ft_is_config_line(char *line);
+
+//render and MLX fonctions
 void	ft_win_creation(t_data *data);
-void	ft_init_game(t_data *data);
-void	ft_print_player(t_data *data, int color);
-long	my_time();
-void	ft_alloc_map(t_data *data, char *filename);
-
 int		ft_render_frame(t_data *data);
-void	ft_print_player(t_data *data, int color);
-void	ft_print_fov(t_data *data);
+void	ft_raycasting(t_data *data);
 void	ft_draw_textured_column(t_data *data, t_ray *ray, int x);
-void	ft_draw_walls(t_data *data);
+
+//hooks fonctions
 void	ft_setup_hooks(t_data *data);
-
-//! fonction handle
-int		ft_verif_state(t_data *data);
 void	ft_handle_rotate(t_data *data, double angle);
-int		ft_handle_hook(int keycode, t_data *data);
-int		ft_release_hook(int keycode, t_data *data);
 void	ft_handle_move(t_data *data, double dx, double dy);
-//void	handle_esc(t_data *data);
+long	my_time(void);
 
-//exit fonction
-
+//clean and exit fonctions
 void	ft_cleanup(t_data *data);
 void	ft_error_msg(char *msg, t_data *data);
 int		ft_close_game(t_data *data);

@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cleanup.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/27 00:56:11 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 00:57:31 by aroduit          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-void	ft_destroy_images(t_data *data)
+static void	ft_destroy_images(t_data *data)
 {
 	int	i;
 
@@ -20,7 +31,7 @@ void	ft_destroy_images(t_data *data)
 	}
 }
 
-void	ft_drain_fd(int fd)
+static void	ft_drain_fd(int fd)
 {
 	char	*line;
 

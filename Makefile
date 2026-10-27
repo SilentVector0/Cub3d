@@ -1,56 +1,63 @@
-NAME = cub3D
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra
-MLXFLAGS = -lXext -lX11 -lm -lz
-INCLUDES = -I. -Ilibft -Iminilibx-linux
+NAME		= cub3D
 
-S = sources
+CC			= cc
+CFLAGS		= -Wall -Werror -Wextra
 
-SRCS_MAIN = $(S)/main/gestion_win.c $(S)/main/main.c
+SRC_DIR		= sources
+LIBFT_DIR	= libft
+MLX_DIR		= minilibx-linux
 
-SRCS_INIT = $(S)/init/init_game.c $(S)/init/init_map.c $(S)/init/setup_player.c
+INCLUDES	= -I. -I$(LIBFT_DIR) -I$(MLX_DIR)
+MLXFLAGS	= -lXext -lX11 -lm -lz
 
-SRCS_CHECK = $(S)/check_map/ft_check_map.c
+SRCS		= $(wildcard $(SRC_DIR)/main/*.c) \
+			$(wildcard $(SRC_DIR)/init/*.c) \
+			$(wildcard $(SRC_DIR)/check_map/*.c) \
+			$(wildcard $(SRC_DIR)/cleanup/*.c) \
+			$(wildcard $(SRC_DIR)/render/*.c) \
+			$(wildcard $(SRC_DIR)/hooks/*.c)
 
-SRCS_CLEANUP = $(S)/cleanup/ft_cleanup.c $(S)/cleanup/ft_exit_game.c
+OBJS		= $(SRCS:.c=.o)
 
-SRCS_RAY_CAST = $(S)/render/render_player.c $(S)/render/handle.c $(S)/render/input.c \
-		$(S)/render/render_map.c $(S)/render/render_fov.c $(S)/render/render.c $(S)/render/draw_texture.c 
+LIBFT		= $(LIBFT_DIR)/libft.a
+MINILIBX	= $(MLX_DIR)/libmlx_Linux.a
 
-SRCS_UTILS = $(S)/utils/my_time.c
+MAP			= map/good/dungeon.cub
 
-SRCS = $(SRCS_INIT) $(SRCS_CHECK) $(SRCS_CLEANUP) $(SRCS_RAY_CAST) $(SRCS_MAIN) $(SRCS_UTILS)
-OBJS = $(SRCS:.c=.o)
-
-LIBFT = libft/libft.a
-MINILIBX = minilibx-linux/libmlx_Linux.a
-
-all: $(LIBFT) $(MINILIBX) $(NAME)
-	clear
-
-$(LIBFT):
-	$(MAKE) -C libft
-
-$(MINILIBX):
-	$(MAKE) -C minilibx-linux
+all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -no-pie -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -o $(NAME)
+
+$(LIBFT):
+	@$(MAKE) -s -C $(LIBFT_DIR)
+
+$(MINILIBX):
+	@$(MAKE) -s -C $(MLX_DIR)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 val: $(NAME)
-	valgrind --leak-check=full --show-leak-kinds=all --track-fds=all --track-origins=yes ./cub3D map/bad/forbidden.cub
+	@valgrind --leak-check=full \
+	--show-leak-kinds=all \
+	--track-fds=all \
+	--track-origins=yes \
+	--error-exitcode=1 \
+	./$(NAME) $(MAP)
+
+run: $(NAME)
+	@./$(NAME) $(MAP)
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C libft clean
-	clear
+	@rm -f $(OBJS)
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	@$(MAKE) -s -C $(MLX_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C libft fclean
-	clear
+	@rm -f $(NAME)
+	@$(MAKE) -s -C libft fclean
 
 re: fclean all
+
+.PHONY: all val run clean fclean re

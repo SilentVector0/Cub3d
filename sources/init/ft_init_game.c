@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 26/10/2026 14:15:47 by aroduit           #+#    #+#             */
+/*   Updated: 27/10/2026 00:59:35 by aroduit          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/cub3d.h"
 
-void	ft_img_init(t_image *img)
+static void	ft_img_init(t_image *img)
 {
 	img->path = NULL;
 	img->mlx_img = NULL;
@@ -11,7 +23,7 @@ void	ft_img_init(t_image *img)
 	img->line_length = 0;
 }
 
-void	ft_init_images(t_data *data)
+static void	ft_init_images(t_data *data)
 {
 	ft_img_init(&data->global);
 	ft_img_init(&data->door);
@@ -25,7 +37,7 @@ void	ft_init_images(t_data *data)
 	data->ceiling = -1;
 }
 
-void	ft_init_player(t_data *data)
+static void	ft_init_player(t_data *data)
 {
 	data->pl.pos_x = 0;
 	data->pl.pos_y = 0;
@@ -35,7 +47,7 @@ void	ft_init_player(t_data *data)
 	data->pl.plane_y = 0;
 }
 
-void	ft_init_map(t_data *data)
+static void	ft_init_map(t_data *data)
 {
 	data->map.grid = NULL;
 	data->map.rows = 0;

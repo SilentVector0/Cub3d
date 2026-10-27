@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_texture.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 09/09/2026 16:02:18 by aroduit           #+#    #+#             */
+/*   Updated: 27/10/2026 03:13:41 by aroduit          ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/cub3d.h"
 
 static	void	ft_get_info_wall(t_data *data, t_ray *ray)
@@ -45,7 +57,7 @@ void	ft_draw_textured_column(t_data *data, t_ray *ray, int x)
 		ray->tex_y = (int)(ray->pos) % TEXTURE_SIZE;
 		ray->pos += ray->step;
 		color = data->wall[ray->dir].addr[ray->tex_y
-				* (data->wall[ray->dir].line_length / 4) + ray->tex_x];
+			* (data->wall[ray->dir].line_length / 4) + ray->tex_x];
 		offset = y * (data->global.line_length / 4) + x;
 		data->global.addr[offset] = color;
 		y++;
