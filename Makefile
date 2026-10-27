@@ -1,5 +1,9 @@
 NAME		= cub3D
 
+GREEN			=	\033[0;32m
+RED				=	\033[0;31m
+RESET			=	\033[0m
+
 CC			= cc
 CFLAGS		= -Wall -Werror -Wextra
 
@@ -38,6 +42,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(MINILIBX)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MINILIBX) $(MLXFLAGS) -o $(NAME)
+	@printf "$(GREEN)✔ $(NAME) compiled$(RESET)\n"
 
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_DIR)
@@ -61,6 +66,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	@echo "$(RED)✘ $(NAME) deleted$(RESET)"
 
 re: fclean all
 
