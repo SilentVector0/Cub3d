@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_map.c                                         :+:      :+:    :+:   */
+/*   ft_init_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 01:56:54 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 01:57:06 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 15:40:38 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 15:40:50 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,5 @@ void	ft_alloc_map(t_data *data, char *filename)
 	ft_build_grid(data, fd);
 	close(fd);
 	data->current_fd = -1;
-	data->map.ecart_h = 200 / data->map.rows;
-	data->map.ecart_w = 200 / data->map.columns;
+	ft_set_scale(data);
 }

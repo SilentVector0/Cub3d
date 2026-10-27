@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 00:56:11 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 00:57:31 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 16:52:40 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 16:52:40 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	ft_destroy_images(t_data *data)
 		return ;
 	if (data->global.mlx_img)
 		mlx_destroy_image(data->mlx_ptr, data->global.mlx_img);
-	if (data->door.mlx_img)
-		mlx_destroy_image(data->mlx_ptr, data->door.mlx_img);
 	i = 0;
 	while (i < 4)
 	{

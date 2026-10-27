@@ -6,7 +6,7 @@
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/27 02:43:44 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 02:43:44 by aroduit          ###   ########.ch       */
+/*   Updated: 2026/10/27 18:36:17 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_win_creation(t_data *data)
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		ft_error_msg("Alloc mlx_ptr fail", data);
+	ft_load_wall_textures(data);
 	data->mlx_win = mlx_new_window(data->mlx_ptr,
 			data->global.width, data->global.height, "cub3d");
 	if (!data->mlx_win)
@@ -50,5 +51,4 @@ void	ft_win_creation(t_data *data)
 			&data->global.bpp, &data->global.line_length, &endian);
 	if (!data->global.addr)
 		ft_error_msg("Take addr fail", data);
-	ft_load_wall_textures(data);
 }

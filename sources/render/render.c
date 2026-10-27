@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 03:09:15 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 03:12:54 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 15:46:56 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 15:46:56 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,26 +77,26 @@ static void	ft_draw_walls(t_data *data)
 
 static void	ft_print_player(t_data *data, int color)
 {
-	size_t	offset;
-	int		count_x;
-	int		current_y;
+	int	px;
+	int	py;
+	int	x;
+	int	y;
 
-	current_y = data->pl.pos_y - 3;
-	while (current_y <= data->pl.pos_y + 3)
+	px = data->pl.pos_x * data->map.ecart_w;
+	py = data->pl.pos_y * data->map.ecart_h;
+	y = py - 3;
+	while (y <= py + 3)
 	{
-		offset = current_y * (data->global.line_length / 4)
-			+ (int)data->pl.pos_x - 3;
-		count_x = 0;
-		while (count_x < 7)
+		x = px - 3;
+		while (x <= px + 3)
 		{
-			if ((current_y >= 0 && current_y < data->global.height)
-				&& (data->pl.pos_x -3 + count_x >= 0
-					&& data->pl.pos_x -3 + count_x < data->global.width))
-				data->global.addr[offset] = color;
-			offset++;
-			count_x++;
+			if (y >= 0 && y < data->global.height
+				&& x >= 0 && x < data->global.width)
+				data->global.addr[y * (data->global.line_length / 4)
+					+ x] = color;
+			x++;
 		}
-		current_y++;
+		y++;
 	}
 }
 

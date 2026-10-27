@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 26/10/2026 14:15:47 by aroduit           #+#    #+#             */
-/*   Updated: 27/10/2026 03:21:52 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 21:12:12 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 21:12:16 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 
-# define ROT_SPEED 0.003
-# define SPEED 0.2
-# define FOV 66
+# define ROT_SPEED		0.003
+# define HITBOX			0.2
+# define SPEED			0.004
+# define MAX_DELTA		50
+# define FOV			66
 
 # define COLOR_WALL		0xFFFFFF
-# define COLOR_FOV		0x0000FF
 # define COLOR_PLAYER	0xFF0000
-# define TEXTURE_SIZE	64
 
 # define RED	"\033[31m"
 # define PURPLE	"\033[35m"
@@ -101,7 +101,6 @@ typedef struct s_data
 	t_map		map;
 	t_image		global;
 	t_image		wall[4];
-	t_image		door;
 	t_player	pl;
 	t_keypress	kp;
 	long		time;
@@ -143,7 +142,10 @@ void	ft_alloc_map(t_data *data, char *filename);
 void	ft_config_and_search_map(t_data *data, int fd);
 void	ft_check_parameters(int argc, char **argv, t_data *data);
 void	ft_check_map(t_data *data);
+void	ft_set_scale(t_data *data);
+void	ft_check_config(t_data *data);
 int		ft_is_config_line(char *line);
+void	ft_check_empty_rows(t_data *data);
 
 //render and MLX fonctions
 void	ft_win_creation(t_data *data);
@@ -154,7 +156,7 @@ void	ft_draw_textured_column(t_data *data, t_ray *ray, int x);
 //hooks fonctions
 void	ft_setup_hooks(t_data *data);
 void	ft_handle_rotate(t_data *data, double angle);
-void	ft_handle_move(t_data *data, double dx, double dy);
+void	ft_move_player(t_data *data);
 long	my_time(void);
 
 //clean and exit fonctions

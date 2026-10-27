@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_param.c                                       :+:      :+:    :+:   */
+/*   ft_init_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 01:47:47 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 01:48:21 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 21:47:08 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 21:47:28 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static void	ft_get_color(t_data *data, char *line, int *color)
 
 static void	ft_is_texture_path(t_data *data, char *line)
 {
+	while (*line == ' ')
+		line++;
 	if (!ft_strncmp(line, "NO ", 3) && !data->wall[NO].path)
 		ft_get_path(data, line + 3, &data->wall[NO].path);
 	else if (!ft_strncmp(line, "SO ", 3) && !data->wall[SO].path)

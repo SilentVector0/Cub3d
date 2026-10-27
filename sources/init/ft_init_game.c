@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   ft_init_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 26/10/2026 14:15:47 by aroduit           #+#    #+#             */
-/*   Updated: 27/10/2026 00:59:35 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 17:52:15 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 17:52:15 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	ft_img_init(t_image *img)
 static void	ft_init_images(t_data *data)
 {
 	ft_img_init(&data->global);
-	ft_img_init(&data->door);
 	ft_img_init(&data->wall[NO]);
 	ft_img_init(&data->wall[SO]);
 	ft_img_init(&data->wall[WE]);
@@ -54,6 +53,8 @@ static void	ft_init_map(t_data *data)
 	data->map.columns = 0;
 	data->map.player = 0;
 	data->map.alloc = 0;
+	data->map.ecart_h = 0;
+	data->map.ecart_w = 0;
 }
 
 void	ft_init_game(t_data *data)

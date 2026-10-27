@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 02:55:09 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 02:55:09 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 16:04:31 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 16:04:31 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int	main(int argc, char **argv)
 	ft_init_game(data);
 	ft_check_parameters(argc, argv, data);
 	ft_alloc_map(data, argv[1]);
+	ft_check_config(data);
 	ft_check_map(data);
-	data->time = my_time();
 	ft_win_creation(data);
+	data->time = my_time();
 	ft_setup_hooks(data);
 	mlx_loop(data->mlx_ptr);
 	return (0);

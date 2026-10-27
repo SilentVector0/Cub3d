@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 03:13:11 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 03:13:28 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 15:42:44 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 15:43:39 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	ft_pos_player(t_data *data, t_ray *ray)
 	double	p_x;
 	double	p_y;
 
-	p_x = data->pl.pos_x / data->map.ecart_w;
-	p_y = data->pl.pos_y / data->map.ecart_h;
+	p_x = data->pl.pos_x;
+	p_y = data->pl.pos_y;
 	if (ray->step_x == 1)
 		ray->side_dist_x = (ray->map_x + 1.0 - p_x) * ray->delta_dist_x;
 	else
@@ -99,8 +99,8 @@ void	ft_raycasting(t_data *data)
 		ray.camera_x = 2 * (double)x / data->global.width - 1;
 		ray.ray_dir_x = data->pl.dir_x + data->pl.plane_x * ray.camera_x;
 		ray.ray_dir_y = data->pl.dir_y + data->pl.plane_y * ray.camera_x;
-		ray.map_x = (int)(data->pl.pos_x / data->map.ecart_w);
-		ray.map_y = (int)(data->pl.pos_y / data->map.ecart_h);
+		ray.map_x = (int)data->pl.pos_x;
+		ray.map_y = (int)data->pl.pos_y;
 		ft_calculate_step(data, &ray);
 		ft_perform_dda(data, &ray);
 		ft_compute_wall_dist(data, &ray);

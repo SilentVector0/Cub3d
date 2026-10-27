@@ -10,12 +10,22 @@ MLX_DIR		= minilibx-linux
 INCLUDES	= -I. -I$(LIBFT_DIR) -I$(MLX_DIR)
 MLXFLAGS	= -lXext -lX11 -lm -lz
 
-SRCS		= $(wildcard $(SRC_DIR)/main/*.c) \
-			$(wildcard $(SRC_DIR)/init/*.c) \
-			$(wildcard $(SRC_DIR)/check_map/*.c) \
-			$(wildcard $(SRC_DIR)/cleanup/*.c) \
-			$(wildcard $(SRC_DIR)/render/*.c) \
-			$(wildcard $(SRC_DIR)/hooks/*.c)
+SRCS		= $(SRC_DIR)/main/main.c \
+			$(SRC_DIR)/main/ft_utils.c \
+			$(SRC_DIR)/main/ft_gestion_win.c \
+			$(SRC_DIR)/init/ft_init_game.c \
+			$(SRC_DIR)/init/ft_init_map.c \
+			$(SRC_DIR)/init/ft_init_param.c \
+			$(SRC_DIR)/init/ft_init_utils.c \
+			$(SRC_DIR)/check_map/ft_check_map.c \
+			$(SRC_DIR)/check_map/ft_check_utils.c \
+			$(SRC_DIR)/cleanup/ft_cleanup.c \
+			$(SRC_DIR)/cleanup/ft_exit_game.c \
+			$(SRC_DIR)/render/render.c \
+			$(SRC_DIR)/render/raycasting.c \
+			$(SRC_DIR)/render/draw_texture.c \
+			$(SRC_DIR)/hooks/hook.c \
+			$(SRC_DIR)/hooks/handle.c
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -35,16 +45,10 @@ $(LIBFT):
 $(MINILIBX):
 	@$(MAKE) -s -C $(MLX_DIR)
 
+$(OBJS): includes/cub3d.h
+
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-val: $(NAME)
-	@valgrind --leak-check=full \
-	--show-leak-kinds=all \
-	--track-fds=all \
-	--track-origins=yes \
-	--error-exitcode=1 \
-	./$(NAME) $(MAP)
 
 run: $(NAME)
 	@./$(NAME) $(MAP)
@@ -56,8 +60,8 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -s -C libft fclean
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-.PHONY: all val run clean fclean re
+.PHONY: all run clean fclean re

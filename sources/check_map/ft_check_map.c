@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_and_set_player.c                          :+:      :+:    :+:   */
+/*   ft_check_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 01:43:50 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 01:43:57 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 21:14:23 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 21:14:51 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
-
-void	ft_check_parameters(int argc, char **argv, t_data *data)
-{
-	int	arg_len;
-
-	if (argc != 2)
-		ft_error_msg("You must provide exactly one map file", data);
-	arg_len = ft_strlen(argv[1]);
-	if (arg_len < 4 || ft_strncmp(argv[1] + arg_len - 4, ".cub", 4))
-		ft_error_msg("Map file must have a .cub extension", data);
-}
 
 static void	ft_set_player(t_data *data, char c, int j, int i)
 {
 	if (data->map.player == 1)
 		ft_error_msg("Too Many player", data);
 	data->map.player = 1;
-	data->pl.pos_x = data->map.ecart_w * i + data->map.ecart_w / 2;
-	data->pl.pos_y = data->map.ecart_h * j + data->map.ecart_h / 2;
+	data->pl.pos_x = i + 0.5;
+	data->pl.pos_y = j + 0.5;
 	if (c == 'N')
 		data->pl.dir_y = -1;
 	else if (c == 'E')
@@ -92,6 +81,7 @@ void	ft_check_map(t_data *data)
 
 	j = -1;
 	ft_check_border(data);
+	ft_check_empty_rows(data);
 	while (++j < data->map.rows)
 	{
 		i = -1;

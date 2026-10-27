@@ -5,26 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aroduit <aroduit@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 03:17:28 by aroduit           #+#    #+#             */
-/*   Updated: 2026/10/27 03:18:23 by aroduit          ###   ########.ch       */
+/*   Created: 2026/10/27 16:55:36 by aroduit           #+#    #+#             */
+/*   Updated: 2026/10/27 16:57:23 by aroduit          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/cub3d.h"
 
-static int	ft_can_move(t_data *data, double new_x, double new_y)
+static int	ft_is_wall(t_data *data, double x, double y)
 {
-	int	j;
-	int	i;
-
-	j = new_x / data->map.ecart_w;
-	i = new_y / data->map.ecart_h;
-	if (data->map.grid[i][j] == '1')
-		return (0);
-	return (1);
+	return (data->map.grid[(int)y][(int)x] == '1');
 }
 
-void	ft_handle_move(t_data *data, double dx, double dy)
+static int	ft_can_move(t_data *data, double x, double y)
+{
+	return (!ft_is_wall(data, x - HITBOX, y - HITBOX)
+		&& !ft_is_wall(data, x + HITBOX, y - HITBOX)
+		&& !ft_is_wall(data, x - HITBOX, y + HITBOX)
+		&& !ft_is_wall(data, x + HITBOX, y + HITBOX));
+}
+
+static void	ft_handle_move(t_data *data, double dx, double dy)
 {
 	double	new_x;
 	double	new_y;
@@ -35,6 +36,24 @@ void	ft_handle_move(t_data *data, double dx, double dy)
 		data->pl.pos_x = new_x;
 	if (ft_can_move(data, data->pl.pos_x, new_y))
 		data->pl.pos_y = new_y;
+}
+
+void	ft_move_player(t_data *data)
+{
+	double	fwd;
+	double	side;
+	double	step;
+
+	fwd = data->kp.key[W] - data->kp.key[S];
+	side = data->kp.key[D] - data->kp.key[A];
+	if (fwd != 0 && side != 0)
+	{
+		fwd /= sqrt(2);
+		side /= sqrt(2);
+	}
+	step = SPEED * data->delta;
+	if (fwd != 0 || side != 0)
+		ft_handle_move(data, step * fwd, step * side);
 }
 
 void	ft_handle_rotate(t_data *data, double angle)
